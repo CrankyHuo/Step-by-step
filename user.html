@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<input id="username" type="text" placeholder="username">
+<button id="btn">登录</button>
+<dl id="div">
+    <dt>sexual</dt>
+    <dd>meal</dd>
+    <dt>age</dt>
+    <dd>24</dd>
+</dl>
+<script>
+    document.getElementById('btn').addEventListener('click', function () {
+        var username = document.getElementById('username').value;
+        var url = 'user_ajax.php' + '?username' + username;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                change(xmlhttp.responseText);
+            }
+        };
+        xmlhttp.open('GET', url, true);
+        xmlhttp.send();
+    });
+    function change(str) {
+        var userInfo = JSON.parse('str');
+        var str = '<dt>性别:</dt>';
+        str += '<dd>' + userInfo.sex + '</dd>';
+        str = '<dt>籍贯:</dt>';
+        str += '<dd>' + userInfo.location + '</dd>';
+        document.getElementById('div').innerHTML=str;
+    }
+</script>
+</body>
+</html>
