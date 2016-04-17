@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<style>
+
+</style>
+<body>
+<input id="username" type="text" placeholder="Your Flag Ship">
+<button id="btn">登录</button>
+<dl id="div">
+    <dt>SEX:</dt>
+    <dd>man</dd>
+    <dt>LOCATION:</dt>
+    <dd>beijing</dd>
+</dl>
+<script>
+    document.getElementById('btn').addEventListener('click',function(){
+        var username=document.getElementById('username').value;
+        var url='user_ajax.php'+'?username'+username;
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4 && xmlhttp.status==200) {
+                change(xmlhttp.responseText);
+            }
+        };
+        xmlhttp.open('GET',url,true);
+        xmlhttp.send();
+    });
+    function change(str){
+        document.getElementById('div').innerHTML=str;
+    }
+</script>
+</body>
+</html>
