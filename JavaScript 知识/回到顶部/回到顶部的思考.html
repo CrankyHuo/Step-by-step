@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回到顶部</title>
+    <style type="text/css">
+        body,#content,.item,ul,li,div{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #content{
+            width: 600px;
+            height: 1500px;
+            margin:  0 auto;
+            background-color: #00a0d8;
+        }
+        .item{
+            margin-bottom: 100px;
+            text-align: center;
+        }
+        #go-top{
+            text-decoration: none;
+            color: #ff4500;
+            padding: 3px 5px;
+            border: 1px solid #ff4500;
+            position: absolute;
+            right: 2%;
+        }
+    </style>
+</head>
+<body>
+<div id="content">
+    <div class="item">
+        <div>hello world</div>
+        <ul>
+            <li>hello world</li>
+            <li>hello world</li>
+            <li>hello world</li>
+            <li>hello world</li>
+        </ul>
+    </div>
+    <div class="item">
+        <div>hello world</div>
+        <ul>
+            <li>hello world</li>
+            <li>hello world</li>
+            <li>hello world</li>
+            <li>hello world</li>
+        </ul>
+    </div>
+    <div class="item">
+        <div>hello world</div>
+        <ul>
+            <li>hello world</li>
+            <li>hello world</li>
+            <li>hello world</li>
+            <li>hello world</li>
+        </ul>
+    </div>
+    <div class="item">
+        <div>hello world</div>
+        <ul>
+            <li>hello world</li>
+            <li>hello world</li>
+            <li>hello world</li>
+            <li>hello world</li>
+        </ul>
+    </div>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var Gotop = {
+        init:function(){
+            if($('#go-top').length>0){
+                //判断是否已经被绑定,以免重复append
+                return;
+            }
+            var $goTop = $('<div id="go-top">点我回到顶部</div>');
+            console.log('成功绑定上跳转到top');
+            $('#content').append($goTop);
+            this.$goTop = $goTop;
+            this.bind();
+        },
+        bind:function(){
+            var me = this;
+            $(window).on('scroll',function(e){
+                var offsetTop = $('body').scrollTop();
+                if(offsetTop>200){
+                    me.$goTop.show();
+                    console.log('goTop is show');
+                }else{
+                    me.$goTop.hide();
+                    console.log('goTop is hide');
+                }
+            });
+            me.$goTop.on('click',function(){
+                $(window).scrollTop(0);
+                //这里原本打算用#直接上去,但是这里可以选择距离,也就是可以改造成跳转到指定地方
+            });
+        }
+    };
+    Gotop.init();
+    Gotop.init();
+</script>
+</body>
+</html>
