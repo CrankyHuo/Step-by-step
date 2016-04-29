@@ -5,3 +5,11 @@
      return 
      };
      相对于if($fn) return;要稳妥一些
+
+2.   场景：在ajax发送时，经常需要用到“状态旗帜”，就是防止提交的重复点击，或者懒加载中的微调滑动，
+     让Ajax发送之后让特定的函数处于不应期，等ajax回来之后再解除，有点类似LOL的金身啊；
+     
+     原来总是写 if(xxx=true){function(){return true}};
+     学习一段后 if(xxx){function(){return true}};
+     现在是 if(xxx) return; 
+     
