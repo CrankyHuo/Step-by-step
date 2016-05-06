@@ -13,3 +13,28 @@
      学习一段后 if(xxx){function(){return true}};
      现在是 if(xxx) return; 
      
+3.   场景：需要使用jquery，使用JS为页面上添加一个元素，并且设置其宽高及行高时，自以为是的认为和设定$node.height()一样
+     不需要加单位，最后把自己坑成马
+     $node.height(500);//这个是可以设置$node的高度
+     $mydiv.css({
+        'height':60,
+        'line-height':'60px'
+     });
+     css里面还是要注意，什么需要加单位，什么需要加''；
+     
+4.   场景：在写懒加载时，当要做一个在页面底部的按钮，当它被看到之后发送AJAX
+     很多时候我会写
+     $(window).on('scroll',function(){
+          checkShow($target);
+     })
+     function checkShow($node){
+          if( isShow($node) ){
+               return true;
+          }else{
+               return false;
+          }
+     }
+     后面最后我改写成了
+     function checkShow($node){
+          return(isShow($node))
+     }
