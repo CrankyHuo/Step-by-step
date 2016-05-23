@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Player</title>
+    <link href="./css/iconfont.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+</head>
+<body>
+    <div id="player">
+        <div class="tab-bar">
+            <div class="tab-ct clearfix">
+                <ul class="channel clearfix">
+                    <li class="active"><a href="#">热门</a></li>
+                    <li><a href="#">推荐</a></li>
+                    <li><a href="#">订阅</a></li>
+                </ul>
+            </div>
+            <ul class="panel-ct">
+                <li class="channel-list active">
+                    <ul class="list-ct">
+                        <li class="music-type"><a href="#"><div class="triangle"></div>动漫1</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>日韩1</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>粤语1</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>华语1</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>欧美1</a></li>
+                    </ul>
+                </li>
+                <li class="channel-list">
+                    <ul class="list-ct">
+                        <li class="music-type">
+                            <a href="#">
+                                <div class="triangle"></div>
+                                动漫2</a>
+                        </li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>日韩2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>欧美2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>运动2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>网络2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>粤语2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>华语2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>欧美2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>欧美2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>运动2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>网络2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>运动2</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>网络2</a></li>
+                    </ul>
+                </li>
+                <li class="channel-list">
+                    <ul class="list-ct">
+                        <li class="music-type"><a href="#"><div class="triangle"></div>欧美3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>运动3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>网络3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>粤语3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>华语3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>欧美3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>欧美3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>运动3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>网络3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>运动3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>网络3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>运动3</a></li>
+                        <li class="music-type"><a href="#"><div class="triangle"></div>网络3</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="main-head clearfix">
+                <a href="#"><i class="icon-menu iconfont"></i></a>
+                <a href="#"><i class="icon-info iconfont"></i></a>
+            </div>
+            <div class="main-play">
+                <div class="music-cover"></div>
+                <a href="#"><i class="iconfont play">&#xe608;</i></a>
+            </div>
+            <div class="vol-set">TO DO
+                <span class="vol-triangle"></span>
+            </div>
+            <div class="main-control">
+                <a href="#"><i class="iconfont fav">&#xe60a;</i></a>
+                <a href="#"><i class="iconfont unlike">&#xe602;</i></a>
+                <a href="#"><i class="iconfont next">&#xe600;</i></a>
+                <a href="#"><i class="iconfont user">&#xe605;</i></a>
+                <a href="#"><i class="iconfont vol">&#xe603;</i></a>
+                <a href="#"><i class="iconfont share">&#xe601;</i></a>
+                <a href="#"><i class="iconfont command">&#xe604;</i></a>
+            </div>
+            <div class="main-foot clearfix">
+                <a href="#"><i class="iconfont narrow">&#xe606;</i></a>
+                <div class="lyric">Lyric</div>
+                <a href="#"><i class="iconfont switch">&#xe60c;</i></a>
+            </div>
+        </div>
+    </div>
+<script src="./js/jquery.js"></script>
+<script src="./js/move.js"></script>
+<script src="./js/tab.js"></script>
+<script src="./js/mark.js"></script>
+<script type="text/javascript">
+    Move.init($('#player'));
+    $('.narrow').on('click',function(){
+        $('#player').slideUp();
+    });
+    var target = $('#player .tab-bar .tab-ct .channel li');
+    TabChange.init(target,'#player','.channel-list');
+    $('.icon-menu').on('click',function(){
+        $('.tab-bar').slideToggle();
+    });
+    var target2 = $('.panel-ct .list-ct li');
+    Mark.init(target2,'.triangle');
+
+    var target3 = $('.main-control i');
+    target3.on('click',function(){
+        var $cur = $(this);
+        $cur.parents('a').siblings().children().removeClass('active');
+        $cur.addClass('active');
+    });
+
+    $('.main-control .vol').on('click',function(e){
+      e.preventDefault();
+      $('.vol-set').fadeToggle();
+    })
+    $('body').on('click',function(){
+      $('.vol-set').fadeOut();
+    })
+</script>
+</body>
+</html>
