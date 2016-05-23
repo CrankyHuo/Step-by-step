@@ -60,14 +60,14 @@
     Ball.prototype = {
         move:function(){
             this.idx++;
-            this.moveLeft();
-            this.moveTop();
+            this.moveX();
+            this.moveY();
             return this;
         },
-        moveLeft:function(){
+        moveX:function(){
             this.$node.css('left',this.idx * 5);
         },
-        moveTop:function(){
+        moveY:function(){
             if(this.idx<=120){
                 this.$node.css('bottom',this.idx * 5);
             }
