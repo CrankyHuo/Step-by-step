@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>抛物线</title>
+    <style type="text/css">
+        body,div,a{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .content{
+            position: relative;
+            height: 700px;
+            width: 1300px;
+            margin: 10px auto;
+            border: 2px solid lightcoral;
+        }
+        .ball{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #00b3ee;
+            color: #ffffff;
+            line-height: 100px;
+            text-align: center;
+            position: absolute;
+            bottom:0;
+        }
+        .play{
+            position: absolute;
+            display: inline-block;
+            padding: 20px 30px;
+            background-color: #ee5f5b;
+            border-radius: 5px;
+            left: 50%;
+            margin-left: -48px;
+            transition: 0.3s;
+        }
+        .play:hover{
+            background-color: #9780d6;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="ball">Ball</div>
+    </div>
+    <a href="#" class="play">Start</a>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    function Ball($node){
+        this.$node = $node;
+        this.idx = 0;
+    }
+    Ball.prototype = {
+        move:function(){
+            this.idx++;
+            this.moveLeft();
+            this.moveTop();
+            return this;
+        },
+        moveLeft:function(){
+            this.$node.css('left',this.idx * 5);
+        },
+        moveTop:function(){
+            if(this.idx<=120){
+                this.$node.css('bottom',this.idx * 5);
+            }
+            if(this.idx>120){
+                this.$node.css({
+                    'marginTop':'100',
+                    top:(this.idx-120) * 5
+                });
+            }
+        }
+    };
+    $('.play').on('click',function(e){
+        e.preventDefault();
+        if(this.isPlay) return;
+        this.isPlay = true;
+        play();
+    });
+    function play(){
+        var ball1 = new Ball($('.ball'));
+        var clock = setInterval(function auto(){
+            ball1.move();
+            if(ball1.idx>=240){
+                clearInterval(clock);
+                ball1.isPlay = false;
+            }
+        },50);
+    }
+</script>
+</body>
+</html>
