@@ -14,7 +14,6 @@ var TabChange = {
     bind:function(){
         var _this = this;
         this.$target.on('click',function(e){
-            e.preventDefault();//默认禁止，如果需要可以把这个注释掉
             var $cur = $(this),
                 index = $cur.index();
             $cur.siblings().removeClass('active');
