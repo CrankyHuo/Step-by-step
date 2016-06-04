@@ -101,13 +101,11 @@
                             '</a></li>'
                 }
                 $node = $(Ipt);
-                $('.panel-ct .channel-list').eq(0).children('.list-ct').append($node);
-                // $('.panel-ct .channel-list').children('.list-ct').append($node);
-                //上面已经可是实现menu一键把所有的列表都拉过来,但是我总感觉menu的定位是控制隐藏和展现
-                //顺带把第一个tab的列表给拉下来,切换获取新的列表应该是tab自己的事情
+//                $('.panel-ct .channel-list').eq(0).children('.list-ct').append($node);
+                 $('.panel-ct .channel-list').children('.list-ct').append($node);
             },
             error:function (){
-                menuSend = false;//如果失败之后才解锁,成功就不解锁
+                menuSend = false;
                 alert('列表获取失败');
             }
         })
@@ -138,7 +136,7 @@
 //播放器侧边栏
   //侧边栏上端
     //Tab切换,并且获取频道
-    GetChannel.init($('.tab-ct .channel li'),$('.panel-ct .channel-list'));
+//    GetChannel.init($('.tab-ct .channel li'),$('.panel-ct .channel-list'));
 
 //播放器侧边栏
   //侧边栏内容区域
