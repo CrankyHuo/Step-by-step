@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Todo</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-csp.css">
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body ng-app="todo" class="container" ng-cloak>
+  <h1 class="appname">{{ 'Todo' }}</h1>
+
+  <div ng-controller="TodoController">
+    <ol class="todos">
+      <li ng-class="{ 'done': todo.done }"  class="todo" ng-repeat="todo in todos">
+        <div ng-hide="todo.editing">
+          <input type="checkbox" ng-model="todo.done" ng-change="doneTodo(todo)">
+          <span class="text" ng-dblclick="editTodo(todo)">{{ todo.text }}</span>
+          <span class="pull-right glyphicon glyphicon-remove" ng-click="removeTodo($index)"></span>
+        </div>
+        <form ng-submit="updateTodo(todo, $index)">
+          <input type="text" class="form-control" ng-model="todo.text" ng-show="todo.editing">
+        </form>
+      </li>
+    </ol>
+
+    <form class="todo-form" ng-submit="addTodo()">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="todo">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-block btn-success">Add</button>
+      </div>
+    </form>
+
+  </div>
+
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('todo', [
+      'ngAnimate'
+    ]);
+
+    app.controller('TodoController', function($scope) {
+
+      $scope.todo = '';//清空
+
+      var data = JSON.parse(localStorage.getItem('todos'));
+      $scope.todos = data || [];
+
+      $scope.todos = $scope.todos.map(function(todo) {
+        return {
+          text: todo.text,
+          done: todo.done || false,
+          editing: false
+        }
+      });
+
+      $scope.addTodo = function() {
+
+        $scope.todo = $scope.todo.trim();//把空格都消除掉
+        if ($scope.todo.length === 0) return;//假如用户什么都不输入就返回了
+
+        $scope.todos.push({
+          text: $scope.todo,
+          done: false
+        });//开始向这个数组开始放数据了
+        $scope.todo = '';//之后清楚掉上次输入的痕迹，仿佛如新
+        saveTodos();
+      };
+
+      $scope.removeTodo = function(index) {
+        $scope.todos.splice(index, 1);
+        saveTodos();
+      };
+
+      $scope.editTodo = function(todo) {
+        $scope.todos.forEach((todo) => { todo.editing = false; });
+        todo.editing = true;
+      };
+
+      $scope.updateTodo = function(todo, index) {
+        saveTodos();
+        todo.editing = false;
+      };
+
+      $scope.doneTodo = function(todo) {
+        saveTodos();
+      };
+
+      function saveTodos() {
+        var todos = $scope.todos.map(function(todo) {
+          return {
+            text: todo.text,
+            done: todo.done
+          };
+        });
+
+        localStorage.setItem('todos', JSON.stringify(todos));
+      }
+    });
+  </script>
+</body>
+
+</html>
